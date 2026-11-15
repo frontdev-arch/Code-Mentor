@@ -1,0 +1,28 @@
+{
+  "id": "ex07_format_total",
+  "order": 7,
+  "title": "Formatting a total",
+  "function_name": "format_total",
+  "description": "format_total(prices) should add up a list of prices and return a label such as 'Total: 7.5'. An empty list gives 'Total: 0'.",
+  "expected_behaviour": "format_total([2.5, 5.0]) returns 'Total: 7.5' and format_total([3]) returns 'Total: 3'.",
+  "concepts": ["types", "string concatenation"],
+  "bug": {
+    "category": "type error",
+    "summary": "The function joins a string and a number with +, which raises TypeError.",
+    "lines": ["    return \"Total: \" + total"],
+    "expected_failing": ["T1", "T2", "T3", "T4"],
+    "location_patterns": ["\"Total: \"\\s*\\+\\s*total", "\\+\\s*total", "return statement", "return line", "`total`", "`\\+`"],
+    "disclosure_patterns": ["str\\s*\\(", "f[\"']total", "f-string", "\\.format\\s*\\(", "%\\s*total", "repr\\s*\\("]
+  },
+  "tests": [
+    {"id": "T1", "args": [[2.5, 5.0]], "expected": "Total: 7.5", "description": "two prices with decimals"},
+    {"id": "T2", "args": [[3]], "expected": "Total: 3", "description": "a single whole-number price"},
+    {"id": "T3", "args": [[]], "expected": "Total: 0", "description": "an empty list"},
+    {"id": "T4", "args": [[1.25, 1.25]], "expected": "Total: 2.5", "description": "two equal prices"}
+  ],
+  "hints": {
+    "1": "Python is strict about combining text and numbers. Read the error message and think about the types of the two values being joined.",
+    "2": "Look at the return statement on line {line}, where \"Total: \" and `total` are joined with +. What type is each side?",
+    "3": "`+` between a string and a number raises TypeError, because Python won't guess how to join them. The number has to become text before it is added to the label."
+  }
+}

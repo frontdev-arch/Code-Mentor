@@ -1,0 +1,30 @@
+{
+  "id": "ex06_all_positive",
+  "order": 6,
+  "title": "Are all numbers positive?",
+  "function_name": "all_positive",
+  "description": "all_positive(numbers) should return True only if every number in the list is greater than zero. Zero does not count as positive. An empty list returns True.",
+  "expected_behaviour": "all_positive([1, 2, 3]) returns True and all_positive([1, -2]) returns False.",
+  "concepts": ["early return", "loops", "boolean logic"],
+  "bug": {
+    "category": "incorrect return value (early return)",
+    "summary": "The function returns inside the loop on the first number, so later numbers are never checked.",
+    "lines": ["        if n > 0:", "        else:"],
+    "expected_failing": ["T3", "T5"],
+    "location_patterns": ["return True", "inside the loop", "`return`", "`if`", "returns? (straight away|immediately|early)", "after the first"],
+    "disclosure_patterns": ["n\\s*<=\\s*0", "if not n\\s*>\\s*0", "(move|put|place)\\b.{0,40}\\b(after|outside|below) the loop", "\\ball\\s*\\("]
+  },
+  "tests": [
+    {"id": "T1", "args": [[1, 2, 3]], "expected": true, "description": "all positive"},
+    {"id": "T2", "args": [[-1, 2]], "expected": false, "description": "the first number is negative"},
+    {"id": "T3", "args": [[1, -2]], "expected": false, "description": "a later number is negative"},
+    {"id": "T4", "args": [[]], "expected": true, "description": "an empty list"},
+    {"id": "T5", "args": [[3, 4, 0]], "expected": false, "description": "zero at the end"},
+    {"id": "T6", "args": [[0]], "expected": false, "description": "just zero"}
+  ],
+  "hints": {
+    "1": "Think about how many numbers your function looks at before it gives an answer. Does it check them all?",
+    "2": "Look at the `if` statement inside the loop on line {line} and what each branch does. Trace the list [1, -2]: how far does the loop get?",
+    "3": "Returning from inside the loop ends the function on the first number, so later numbers are never checked. The function can only know the answer is True once every number has been examined."
+  }
+}

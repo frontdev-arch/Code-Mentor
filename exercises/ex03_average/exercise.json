@@ -1,0 +1,28 @@
+{
+  "id": "ex03_average",
+  "order": 3,
+  "title": "Average of a list",
+  "function_name": "average",
+  "description": "average(scores) should return the mean of a list of numbers. If the list is empty it should return 0.0 instead of failing.",
+  "expected_behaviour": "average([2, 4, 6]) returns 4.0 and average([]) returns 0.0.",
+  "concepts": ["empty-list edge cases", "division"],
+  "bug": {
+    "category": "empty-list edge case",
+    "summary": "The function always divides by len(scores), which raises ZeroDivisionError for an empty list.",
+    "lines": ["    return total / len(scores)"],
+    "expected_failing": ["T3"],
+    "location_patterns": ["len\\(\\s*scores\\s*\\)", "return total", "the division", "dividing by", "/\\s*len", "before (the )?(loop|division)"],
+    "disclosure_patterns": ["if not scores", "if len\\(\\s*scores\\s*\\)\\s*==\\s*0", "if scores\\b", "return 0\\.0", "\\bstatistics\\b", "\\bmean\\s*\\("]
+  },
+  "tests": [
+    {"id": "T1", "args": [[2, 4, 6]], "expected": 4.0, "description": "three numbers"},
+    {"id": "T2", "args": [[5]], "expected": 5.0, "description": "a single number"},
+    {"id": "T3", "args": [[]], "expected": 0.0, "description": "an empty list"},
+    {"id": "T4", "args": [[1, 2]], "expected": 1.5, "description": "a mean that is not a whole number"}
+  ],
+  "hints": {
+    "1": "Think about the case where there are no scores at all. What does the description say should happen, and what does your function actually do?",
+    "2": "Look at the division on line {line}. What is `len(scores)` when the list is empty?",
+    "3": "Dividing by `len(scores)` fails when the list is empty, because the length is 0 and Python raises ZeroDivisionError. The function needs to deal with the empty case before it reaches the division."
+  }
+}

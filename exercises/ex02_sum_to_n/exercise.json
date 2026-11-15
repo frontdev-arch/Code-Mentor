@@ -1,0 +1,29 @@
+{
+  "id": "ex02_sum_to_n",
+  "order": 2,
+  "title": "Adding up 1 to n",
+  "function_name": "sum_to_n",
+  "description": "sum_to_n(n) should add up every whole number from 1 to n, including n itself. n is never negative, and sum_to_n(0) is 0.",
+  "expected_behaviour": "sum_to_n(3) returns 6 (1 + 2 + 3) and sum_to_n(10) returns 55.",
+  "concepts": ["off-by-one errors", "range", "loops"],
+  "bug": {
+    "category": "off-by-one error",
+    "summary": "range(1, n) stops before n, so the last number is never added.",
+    "lines": ["    for i in range(1, n):"],
+    "expected_failing": ["T1", "T2", "T3", "T5"],
+    "location_patterns": ["range\\(\\s*1\\s*,\\s*n\\s*\\)", "`range`", "\\brange\\s*\\(", "stop (value|argument)", "end ?point", "upper (bound|limit)", "second argument"],
+    "disclosure_patterns": ["n\\s*\\+\\s*1", "n\\s*\\*\\s*\\(\\s*n", "\\bsum\\s*\\(", "plus one", "add(ing)? (one|1) to"]
+  },
+  "tests": [
+    {"id": "T1", "args": [1], "expected": 1, "description": "n is 1"},
+    {"id": "T2", "args": [3], "expected": 6, "description": "a small n"},
+    {"id": "T3", "args": [10], "expected": 55, "description": "a larger n"},
+    {"id": "T4", "args": [0], "expected": 0, "description": "n is 0"},
+    {"id": "T5", "args": [2], "expected": 3, "description": "n is 2"}
+  ],
+  "hints": {
+    "1": "Think about exactly which numbers your loop visits. Does the sequence include both ends of 1 to n?",
+    "2": "Look at the `range(1, n)` call on line {line} and write out the values it produces when n is 3.",
+    "3": "`range` stops before its second argument, so `range(1, n)` never reaches n and the last number is left out of the total. Change the end point so that n itself is included."
+  }
+}

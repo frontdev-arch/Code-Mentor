@@ -1,0 +1,29 @@
+{
+  "id": "ex08_count_long_words",
+  "order": 8,
+  "title": "Counting long words",
+  "function_name": "count_long_words",
+  "description": "count_long_words(words, min_length) should return how many words in the list have at least min_length characters. An empty list gives 0.",
+  "expected_behaviour": "count_long_words([\"tree\", \"a\", \"house\"], 4) returns 2.",
+  "concepts": ["accumulators", "variable initialisation", "loops"],
+  "bug": {
+    "category": "accumulator reset inside the loop",
+    "summary": "count = 0 is inside the loop, so the count is reset for every word, and an empty list never creates count at all.",
+    "lines": ["        count = 0"],
+    "expected_failing": ["T1", "T3", "T4"],
+    "location_patterns": ["count\\s*=\\s*0", "inside the loop", "\\breset", "`count`"],
+    "disclosure_patterns": ["(move|put|place)\\b.{0,40}\\b(before|above|outside) the loop", "before the (for )?loop", "above the (for )?loop", "outside the loop", "\\bsum\\s*\\(", "\\blen\\s*\\(\\s*\\["]
+  },
+  "tests": [
+    {"id": "T1", "args": [["tree", "a", "house"], 4], "expected": 2, "description": "two long words"},
+    {"id": "T2", "args": [["hi"], 3], "expected": 0, "description": "no long words"},
+    {"id": "T3", "args": [["apple", "kiwi", "banana"], 5], "expected": 2, "description": "long words at the start and end"},
+    {"id": "T4", "args": [[], 3], "expected": 0, "description": "an empty list"},
+    {"id": "T5", "args": [["sun", "moonlight"], 4], "expected": 1, "description": "one long word at the end"}
+  ],
+  "hints": {
+    "1": "Think about what happens to a running count each time a loop goes round. Is anything erasing the progress made so far?",
+    "2": "Look at where `count = 0` sits, on line {line}. How many times does that line run for a list of three words?",
+    "3": "Because `count = 0` is inside the loop, the count goes back to zero for every word, so at most one word is ever counted, and an empty list never creates `count` at all. The counter should be set up once, not on every pass."
+  }
+}

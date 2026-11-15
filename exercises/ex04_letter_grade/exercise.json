@@ -1,0 +1,30 @@
+{
+  "id": "ex04_letter_grade",
+  "order": 4,
+  "title": "Letter grades",
+  "function_name": "letter_grade",
+  "description": "letter_grade(score) turns a whole-number score into a grade: 'A' for 70 and above, 'B' for 60 to 69, 'C' for 50 to 59 and 'F' below 50.",
+  "expected_behaviour": "letter_grade(70) returns 'A', letter_grade(65) returns 'B' and letter_grade(49) returns 'F'.",
+  "concepts": ["conditional logic", "boundary values", "comparison operators"],
+  "bug": {
+    "category": "incorrect conditional logic",
+    "summary": "The comparisons use > instead of including the boundary, so 70, 60 and 50 get the grade below.",
+    "lines": ["    if score > 70:", "    elif score > 60:", "    elif score > 50:"],
+    "expected_failing": ["T2", "T4", "T5"],
+    "location_patterns": ["score\\s*>\\s*(70|60|50)", "`>`", "greater-than (sign|operator)", "operator"],
+    "disclosure_patterns": [">=", "greater than or equal", "=>", ">\\s*69", ">\\s*59", ">\\s*49"]
+  },
+  "tests": [
+    {"id": "T1", "args": [85], "expected": "A", "description": "a clear A"},
+    {"id": "T2", "args": [70], "expected": "A", "description": "exactly on the A boundary"},
+    {"id": "T3", "args": [65], "expected": "B", "description": "a clear B"},
+    {"id": "T4", "args": [60], "expected": "B", "description": "exactly on the B boundary"},
+    {"id": "T5", "args": [50], "expected": "C", "description": "exactly on the C boundary"},
+    {"id": "T6", "args": [30], "expected": "F", "description": "a clear F"}
+  ],
+  "hints": {
+    "1": "Look closely at scores that sit exactly on a grade boundary. Which grade should a score of exactly 70 get?",
+    "2": "Compare the condition `score > 70` on line {line} with the description, which says that 70 and above earns an A.",
+    "3": "`>` is false when the score equals the boundary, so 70, 60 and 50 fall through to the next grade down. Each comparison needs to include the boundary value itself."
+  }
+}

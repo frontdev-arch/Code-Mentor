@@ -1,0 +1,30 @@
+{
+  "id": "ex05_count_vowels",
+  "order": 5,
+  "title": "Counting vowels",
+  "function_name": "count_vowels",
+  "description": "count_vowels(text) should return how many letters in text are vowels (a, e, i, o or u, upper or lower case).",
+  "expected_behaviour": "count_vowels(\"hello\") returns 2 and count_vowels(\"sky\") returns 0.",
+  "concepts": ["loop boundaries", "string indexing"],
+  "bug": {
+    "category": "loop boundary error",
+    "summary": "range(len(text) - 1) stops one index early, so the last character is never checked.",
+    "lines": ["    for i in range(len(text) - 1):"],
+    "expected_failing": ["T1", "T3", "T5"],
+    "location_patterns": ["range\\(\\s*len\\(\\s*text\\s*\\)\\s*-\\s*1\\s*\\)", "-\\s*1\\b", "`range`", "\\brange\\s*\\(", "loop (bound|limit|range|header|condition)"],
+    "disclosure_patterns": ["range\\(\\s*len\\(\\s*text\\s*\\)\\s*\\)", "for (ch|char|c|letter|character) in text", "(remove|drop|delete|without) the\\s*-\\s*1", "\\bsum\\s*\\(", "\\.count\\s*\\("]
+  },
+  "tests": [
+    {"id": "T1", "args": ["hello"], "expected": 2, "description": "a word ending in a vowel"},
+    {"id": "T2", "args": ["sky"], "expected": 0, "description": "no vowels"},
+    {"id": "T3", "args": ["AEIOU"], "expected": 5, "description": "only capital vowels"},
+    {"id": "T4", "args": [""], "expected": 0, "description": "an empty string"},
+    {"id": "T5", "args": ["banana"], "expected": 3, "description": "repeated vowels"},
+    {"id": "T6", "args": ["rhythm"], "expected": 0, "description": "a longer word with no vowels"}
+  ],
+  "hints": {
+    "1": "Pick a word that ends in a vowel and check whether every character, including the last one, gets examined.",
+    "2": "Look at the loop header on line {line}. Write out the index values it produces for the word \"hello\".",
+    "3": "`range(len(text) - 1)` stops one index short, so the last character is never checked. The loop needs to cover every index of the string."
+  }
+}

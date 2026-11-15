@@ -1,0 +1,32 @@
+{
+  "id": "ex01_find_max",
+  "order": 1,
+  "title": "Largest number in a list",
+  "function_name": "find_max",
+  "description": "find_max(numbers) should return the largest number in a list. The list always contains at least one number, and the numbers can be positive, zero or negative.",
+  "expected_behaviour": "find_max([3, 7, 2]) returns 7 and find_max([-3, -1, -7]) returns -1.",
+  "concepts": ["variable initialisation", "loops", "comparison"],
+  "bug": {
+    "category": "incorrect variable initialisation",
+    "summary": "maximum starts at 0 instead of a value taken from the list, so a list of only negative numbers returns 0.",
+    "lines": ["    maximum = 0"],
+    "expected_failing": ["T3", "T4"],
+    "location_patterns": ["`maximum`", "maximum\\s*=\\s*0", "maximum starts", "starting value", "initial value", "initiali[sz]", "start(s|ing|ed)?\\b.{0,20}\\b(at|from|with) (0|zero)\\b", "set to (0|zero)"],
+    "disclosure_patterns": ["numbers\\s*\\[\\s*0\\s*\\]", "first (element|item|number|value|entry)", "-\\s?inf", "float\\(\\s*['\"]-?inf", "negative infinity", "\\bmax\\s*\\(",
+   "\\b(index|position) (0|zero)\\b",
+   "\\b(item|element|value|number|entry) at (index |position )?(0|zero)\\b",
+   "\\bzeroth\\b"]
+  },
+  "tests": [
+    {"id": "T1", "args": [[3, 7, 2]], "expected": 7, "description": "mixed positive numbers"},
+    {"id": "T2", "args": [[5]], "expected": 5, "description": "a single positive number"},
+    {"id": "T3", "args": [[-3, -1, -7]], "expected": -1, "description": "only negative numbers"},
+    {"id": "T4", "args": [[-5]], "expected": -5, "description": "a single negative number"},
+    {"id": "T5", "args": [[0, -2]], "expected": 0, "description": "zero and a negative number"}
+  ],
+  "hints": {
+    "1": "Think about what your function returns when every number in the list is below zero. Which values can the result ever take?",
+    "2": "Look at the starting value given to `maximum` on line {line}. Trace the loop by hand with the list [-3, -1, -7].",
+    "3": "Because `maximum` starts at 0, no negative number is ever larger than it, so the loop never updates it. The starting value needs to be one that comes from the list itself, so that every list gives a fair comparison."
+  }
+}
