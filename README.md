@@ -1,12 +1,12 @@
 # CodeMentor
 
-Code Mentors overall aim is a Python debugging tutor for beginners with three hint levels and execution results shown separately from AI interpretation. Stage 2 snapshot contains the exercise bank, restricted test runner and checks for hint levels and content. It does not yet include the complete tutor workflow or an interface.
+Code Mentors overall aim is a Python debugging tutor for beginners with three hint levels and execution results shown separately from AI interpretation. This Stage 3 snapshot includes the complete local prototype: exercises, test runner, hint checks, interface and repeatable demonstrations. Hints are pre-written or simulated using fixed replies.
 
-README prose word count: 1051 words (excludes fenced commands and the count line, includes headings/table text.)
+README prose word count: 1388 words (excludes fenced commands and the count line, includes headings/table text.)
 
 ## About this repository
 
-This repository imports a locally developed prototype in stages. Stage 1 imported the exercise bank and restricted test runner. Stage 2 adds hint controls, reply checks and tests across the exercise bank.
+This repository imports a locally developed prototype in stages. Stage 1 imported the exercise bank and restricted test runner. Stage 2 added hint controls, reply checks and tests across the exercise bank. Stage 3 imports the tutor workflow, interface, demonstrations and supporting documents.
 
 ## Project status
 
@@ -15,24 +15,28 @@ This repository imports a locally developed prototype in stages. Stage 1 importe
 | 10 debugging exercises with tests, bug metadata and pre written hints | Included                       |
 | Test runner with restrictions on what student code can do             | Included                       |
 | Hint levels, reply schema and hint policy checker                     | Included |
-| Tutor pipeline with a simulated AI and scripted demonstrations        | Not included in this snapshot  |
-| Interface (`app.py`)                                                  | Not included in this snapshot  |
+| Tutor pipeline with a simulated AI and scripted demonstrations        | Included  |
+| Interface (`app.py`)                                                  | Included  |
 
 ## Technology
 
 - **Python 3.12 on macOS**: the configuration tested locally. The runner uses only the standard library.
 - The runner relies on operating-system features that are unavailable on Windows. Other platforms and Python versions have not been tested here.
-- **pytest**: all 135 tests in this snapshot passed in the latest check.
+- **pytest**: all 159 tests in this snapshot passed in the latest check.
+- **Streamlit** provides the browser interface. Offline mode uses pre-written hints. `ScriptedProvider` replays fixed replies for the demonstrations. Neither mode requires an API key.
 
 ## Running it
 
 ```bash
 python3.12 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m pytest             
+.venv/bin/python -m pytest
+.venv/bin/streamlit run app.py
 ```
 
-This snapshot has no application interface
+Run these commands from the project folder, then open the local address displayed in the terminal. Choose an exercise, edit its code, select **Run tests** and request a hint. Use **More specific** to move through the three levels.
+
+For the two simulated conversations, follow [the demo instructions](demo/README.md). Restart the app with the command for the chosen script and use exercise 1. The replies are fixed demonstrations, not evidence of how a live model would behave.
 
 ## Exercises and tests
 
@@ -44,7 +48,7 @@ Each `exercises/<id>/` folder holds:
 
 `codementor/exercises.py` loads each folder and checks that key information is present, test names are unique and all three hint levels are included. It also checks that the text matching rules can be read. These checks do not catch every possible problem with an exercise. The hints and matching rules are used by the hint checker included in Stage 2.
 
-`tests/test_runner.py` uses exercise 1 to check that results and errors are reported correctly. Code that takes too long is stopped and changes to test inputs do not affect other tests. It also checks restrictions on launching programs making network connections and accessing files and checks that a sample secret setting is not passed to student code. 
+`tests/test_runner.py` uses exercise 1 to check that results and errors are reported correctly. Code that takes too long is stopped and changes to test inputs do not affect other tests. It also checks restrictions on launching programs making network connections and accessing files and checks that a sample secret setting is not passed to student code.
 
 `tests/test_exercises.py` runs every starter and reference solution through the runner and checks the pre-written hints against the hint rules. Separate tests cover hint levels, reply format and rejection of unsuitable hints.
 
@@ -72,9 +76,27 @@ This import adds three components from the local prototype:
 - `codementor/schema.py` checks that a reply contains the required information in the expected format. This catches incomplete or wrongly formatted replies before their content is checked.
 - `codementor/policy.py` checks hints for the requested level, solution disclosure, references to test results and unsupported claims. Rejection summaries avoid repeating text that could reveal an answer.
 
-The expanded suite passed all 135 tests in the latest check. It covers all ten exercise starters and reference solutions, pre-written hints, level changes and examples of acceptable and rejected replies. These checks make the components inspectable before the complete tutor workflow is imported. 
+At the Stage 2 import, the expanded suite passed all 135 tests. It covers all ten exercise starters and reference solutions, pre-written hints, level changes and examples of acceptable and rejected replies. These checks make the components inspectable before the complete tutor workflow is imported.
 
-The interface, simulated tutor workflow and illustrated demonstrations are outside this snapshot.
+### Stage 3: complete local interaction
+
+- `codementor/tutor.py` connects test results, hint levels and reply checks. It retries rejected replies and uses pre-written guidance when suitable replies are unavailable, so the interaction can continue.
+- `app.py` adds the interface. Code and questions are submitted together so a hint uses the current input. Test results appear separately from the tutor's interpretation. A reference to a failing test is labelled as a citation, not proof that the explanation is correct.
+- `codementor/providers.py` supplies fixed simulated replies, while `prompts.py` prepares the request information. Rejection feedback avoids repeating text that could reveal a solution.
+- `config.py` selects the mode and `eventlog.py` records runs and hint requests. Local records are saved in `logs/`, which Git ignores.
+- `demo/` includes a rejected solution followed by an acceptable hint, and a wrong diagnosis that cites a real failing test. These demonstrate both the checks and their limits.
+
+The complete suite passed **159 tests** after this import. Added tests cover retries, fallback hints, current-code checks, safe rejection feedback and both demonstration scripts. A separate interface smoke check loaded the app, ran an exercise and displayed a Level 1 hint. This is not a full usability evaluation.
+
+Earlier imports: [Stage 1](https://github.com/frontdev-arch/Code-Mentor/commit/d54cfbd) and [Stage 2](https://github.com/frontdev-arch/Code-Mentor/commit/3b03f05).
+
+## Report and illustrations
+
+- [Project report](docs/Assignment%202%20report.docx): explains the design and interaction. Its submitted-commit field still needs the final submission version.
+- [Architecture diagram](docs/architecture.png): shows the system components and connections.
+- [Storyboard 1](docs/storyboard1.png), [Storyboard 2](docs/storyboard2.png) and [Storyboard 3](docs/storyboard3.png): illustrate progressive hints, a solution request and a challenged diagnosis.
+
+These files are included in the repository.
 
 
 ## Limitations
@@ -83,7 +105,7 @@ The interface, simulated tutor workflow and illustrated demonstrations are outsi
 - macOS provides extra protection. The available restrictions depend on the operating system.
 - Passing the supplied tests does not mean the code will work correctly for every possible input.
 - Hint checks use rules that recognise particular wording. They can miss a reworded solution or an incorrect explanation, so passing the checks does not prove that a hint is correct.
-- The simulated tutor workflow and interface cannot be run from this snapshot.
+- Simulated replies do not demonstrate live model reliability. Learning benefits have not been established through a learner study.
 
 ## AI assistance
 

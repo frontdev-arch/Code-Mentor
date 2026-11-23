@@ -1,0 +1,44 @@
+[
+  {
+    "hint": "Tests T3 and T4 use lists where every number is below zero. Which values can your result ever take for lists like these?",
+    "target_concept": "all-negative input",
+    "level": 1,
+    "evidence_ids": [
+      "T3",
+      "T4"
+    ],
+    "has_unverified_interpretation": false,
+    "rationale": "demo script"
+  },
+  {
+    "hint": "Look at the starting value given to `maximum` on line 3, then trace the loop by hand with [-3, -1, -7].",
+    "target_concept": "initial value",
+    "level": 2,
+    "evidence_ids": [
+      "T3"
+    ],
+    "has_unverified_interpretation": false,
+    "rationale": "demo script"
+  },
+  {
+    "hint": "The comparison with `maximum` mishandles duplicate values, which is why T3 fails.",
+    "target_concept": "duplicates",
+    "level": 3,
+    "evidence_ids": [
+      "T3"
+    ],
+    "has_unverified_interpretation": true,
+    "rationale": "demo script"
+  },
+  {
+    "hint": "T3's list has no repeated values, so duplicates can't explain it. `maximum` starts at 0, and no negative number is ever larger than 0. The starting value needs to come from the list itself.",
+    "target_concept": "initial value",
+    "level": 3,
+    "evidence_ids": [
+      "T3",
+      "T4"
+    ],
+    "has_unverified_interpretation": true,
+    "rationale": "demo script"
+  }
+]

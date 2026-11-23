@@ -1,0 +1,23 @@
+[
+  {
+    "hint": "Set `maximum = numbers[0]` before the loop and every test will pass.",
+    "target_concept": "initialisation",
+    "level": 1,
+    "evidence_ids": [
+      "T3"
+    ],
+    "has_unverified_interpretation": false,
+    "rationale": "demo script"
+  },
+  {
+    "hint": "Tests T3 and T4 use lists where every number is below zero. Which values can your result ever take for lists like these?",
+    "target_concept": "all-negative input",
+    "level": 1,
+    "evidence_ids": [
+      "T3",
+      "T4"
+    ],
+    "has_unverified_interpretation": false,
+    "rationale": "demo script"
+  }
+]
