@@ -86,9 +86,8 @@ All 159 automated tests passed in the latest audit. These results cover the supp
 
 The review found that two interface messages overstated solution prevention and omitted automatic level resets. The wording now explains both limits. The architecture diagram now uses solid arrows for implemented information flows and labels the student code, inputs and settings sent to the runner's separate process. The solution-request storyboard was refreshed to match the interface. These are presentation corrections; the underlying hint rules are unchanged.
 
-## Report and illustrations
+## Illustrations
 
-- [Project report](docs/Assignment%202%20report.docx): explains the design and interaction. Its submitted-commit field still needs the final submission version.
 - [Architecture diagram](docs/architecture.png): shows the system components and connections.
 - [Storyboard 1](docs/storyboard1.png), [Storyboard 2](docs/storyboard2.png) and [Storyboard 3](docs/storyboard3.png): illustrate progressive hints, a solution request and a challenged diagnosis.
 
