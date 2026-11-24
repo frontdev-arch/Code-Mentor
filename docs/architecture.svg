@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1050" viewBox="0 0 1800 1050"><defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 Z" fill="#42566b"/></marker></defs><rect width="1800" height="1050" fill="white"/><style>text{font-family:Arial,sans-serif;fill:#172d42}.label{font-size:19px;paint-order:stroke;stroke:white;stroke-width:7px;stroke-linejoin:round}.title{font-size:23px;font-weight:600}.sub{font-size:16px}</style>
+<text x="65" y="55" text-anchor="start" class="title">CodeMentor system architecture</text>
+<text x="65" y="88" text-anchor="start" class="sub">Implemented workflow with simulated model replies and a planned comparison</text>
+<rect x="60" y="160" width="190" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="155.0" y="196" text-anchor="middle" class="title">Student</text>
+<text x="155.0" y="225" text-anchor="middle" class="sub">code and questions</text>
+<rect x="310" y="160" width="230" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="425.0" y="196" text-anchor="middle" class="title">Interface</text>
+<text x="425.0" y="225" text-anchor="middle" class="sub">app.py · Streamlit</text>
+<rect x="650" y="160" width="260" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="780.0" y="196" text-anchor="middle" class="title">Tutor session</text>
+<text x="780.0" y="225" text-anchor="middle" class="sub">tutor.py · retries, fallback</text>
+<rect x="1100" y="160" width="230" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="1215.0" y="196" text-anchor="middle" class="title">Test runner</text>
+<text x="1215.0" y="225" text-anchor="middle" class="sub">runner.py · compares results</text>
+<rect x="1450" y="160" width="290" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="1595.0" y="196" text-anchor="middle" class="title">Separate Python process</text>
+<text x="1595.0" y="225" text-anchor="middle" class="sub">_harness.py · restrictions</text>
+<polyline points="250,202 310,202" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" marker-start="url(#arrow)" />
+<polyline points="540,202 650,202" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" marker-start="url(#arrow)" />
+<text x="595" y="145" text-anchor="middle" class="label">actions / feedback</text>
+<polyline points="910,183 1100,183" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="1005" y="163" text-anchor="middle" class="label">student code</text>
+<polyline points="1100,223 910,223" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="1005" y="255" text-anchor="middle" class="label">test results</text>
+<polyline points="1330,183 1450,183" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="1535" y="122" text-anchor="middle" class="label">student code, test inputs and run settings</text>
+<polyline points="1450,223 1330,223" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="1440" y="280" text-anchor="middle" class="label">returned values / errors</text>
+<rect x="650" y="350" width="260" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="780.0" y="386" text-anchor="middle" class="title">Hint controller</text>
+<text x="780.0" y="415" text-anchor="middle" class="sub">hint_controller.py · levels 1–3</text>
+<polyline points="780,245 780,350" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" marker-start="url(#arrow)" />
+<text x="835" y="285" text-anchor="middle" class="label">request / level</text>
+<rect x="1100" y="350" width="230" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="1215.0" y="386" text-anchor="middle" class="title">Exercise bank</text>
+<text x="1215.0" y="415" text-anchor="middle" class="sub">10 exercises and test cases</text>
+<polyline points="1215,350 1215,245" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="1355" y="315" text-anchor="middle" class="label">test inputs + expected answers</text>
+<rect x="60" y="600" width="260" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="190.0" y="636" text-anchor="middle" class="title">Context assembly</text>
+<text x="190.0" y="665" text-anchor="middle" class="sub">prompts.py · code and evidence</text>
+<rect x="440" y="600" width="260" height="85" rx="12" fill="#fff3e8" stroke="#b95c21" stroke-width="2.5" stroke-dasharray="4 5"/>
+<text x="570.0" y="636" text-anchor="middle" class="title">Simulated model</text>
+<text x="570.0" y="665" text-anchor="middle" class="sub">fixed scripted replies</text>
+<rect x="820" y="600" width="260" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="950.0" y="636" text-anchor="middle" class="title">Reply format check</text>
+<text x="950.0" y="665" text-anchor="middle" class="sub">schema.py</text>
+<rect x="1200" y="600" width="260" height="85" rx="12" fill="#edf4fb" stroke="#315c82" stroke-width="2.5" />
+<text x="1330.0" y="636" text-anchor="middle" class="title">Hint content check</text>
+<text x="1330.0" y="665" text-anchor="middle" class="sub">policy.py · 15 rule categories</text>
+<polyline points="650,225 580,225 580,490 190,490 190,600" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="360" y="470" text-anchor="middle" class="label">code, question, level and results</text>
+<polyline points="320,642 440,642" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="380" y="620" text-anchor="middle" class="label">request</text>
+<polyline points="700,642 820,642" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="760" y="620" text-anchor="middle" class="label">reply</text>
+<polyline points="1080,642 1200,642" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="1140" y="620" text-anchor="middle" class="label">valid reply</text>
+<polyline points="1330,600 1330,525 950,525 950,310 910,310 910,245" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="1105" y="510" text-anchor="middle" class="label">accepted hint</text>
+<polyline points="1215,435 1215,470 1400,470 1400,600" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="1510" y="455" text-anchor="middle" class="label">reference solution + matching rules</text>
+<text x="1510" y="482" text-anchor="middle" class="label">local checks only; not in model requests</text>
+<polyline points="1330,685 1330,775 190,775 190,685" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" />
+<text x="780" y="755" text-anchor="middle" class="label">Rejected: fixed feedback without quoted solutions · at most three attempts</text>
+<rect x="650" y="860" width="320" height="85" rx="12" fill="#f8f8f8" stroke="#888" stroke-width="2.5" stroke-dasharray="12 8"/>
+<text x="810.0" y="896" text-anchor="middle" class="title">Prompt-only comparison</text>
+<text x="810.0" y="925" text-anchor="middle" class="sub">planned for Assignment 3</text>
+<polyline points="650,900 570,900 570,685" fill="none" stroke="#42566b" stroke-width="2.4" marker-end="url(#arrow)" stroke-dasharray="10 7" />
+<text x="1280" y="870" text-anchor="middle" class="sub">Expected answers stay in the test runner.</text>
+<text x="1280" y="900" text-anchor="middle" class="sub">Offline mode uses pre-written guidance.</text>
+<text x="1280" y="930" text-anchor="middle" class="sub">No live model or API key is used.</text>
+<rect x="60" y="975" width="28" height="22" fill="#edf4fb" stroke="#315c82" stroke-width="2"/>
+<text x="100" y="994" text-anchor="start" class="sub">Implemented component and solid flow</text>
+<rect x="550" y="975" width="28" height="22" fill="#fff3e8" stroke="#b95c21" stroke-width="2" stroke-dasharray="4 5"/>
+<text x="590" y="994" text-anchor="start" class="sub">Simulated model</text>
+<rect x="920" y="975" width="28" height="22" fill="#f8f8f8" stroke="#888" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="960" y="994" text-anchor="start" class="sub">Planned component and dashed flow</text>
+</svg>

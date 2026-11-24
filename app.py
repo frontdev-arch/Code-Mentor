@@ -114,10 +114,10 @@ def render_hint(record: HintRecord, latest: bool) -> None:
         if record.student_message:
             st.markdown(f"🙋 **You asked:** {record.student_message}")
         if "solution_request" in record.policy_flags:
-            st.warning("🙅 CodeMentor doesn't give complete solutions, even when asked. "
+            st.warning("🙅 CodeMentor is designed to provide hints rather than complete solutions, but its checks may miss some disclosures. "
                        "You can ask for a more specific hint, or change your code and run the tests.")
         if "rule_override" in record.policy_flags:
-            st.warning("🔒 Messages can't change the hint level or the rules. The level only changes when you press the hint buttons.")
+            st.warning("🔒 Messages cannot override the hint rules. Use the buttons to request more detail; hints restart at Level 1 when the set of failing tests changes.")
         if record.source == SOURCE_SYSTEM:
             st.info(record.text)
             return
@@ -177,7 +177,7 @@ def main() -> None:
 
     with st.sidebar:
         st.markdown("## 🧭 CodeMentor")
-        st.caption("A Python debugging tutor that gives hints, not solutions.")
+        st.caption("A Python debugging tutor designed to guide you with hints.")
         by_id = {e.id: e for e in exercises}
         exercise = by_id[st.selectbox("Exercise", list(by_id), format_func=lambda i: f"{by_id[i].order}. {by_id[i].title}")]
         st.divider()

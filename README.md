@@ -2,7 +2,7 @@
 
 Code Mentors overall aim is a Python debugging tutor for beginners with three hint levels and execution results shown separately from AI interpretation. This Stage 3 snapshot includes the complete local prototype: exercises, test runner, hint checks, interface and repeatable demonstrations. Hints are pre-written or simulated using fixed replies.
 
-README prose word count: 1388 words (excludes fenced commands and the count line, includes headings/table text.)
+README prose word count: 1337 words (excludes fenced commands and the count line, includes headings/table text.)
 
 ## About this repository
 
@@ -62,33 +62,29 @@ The runner runs student code separately from the tutor and applies five checks a
 4. **Checks while running.** Python checks block selected actions including starting other programs and making network connections. File access is limited to the temporary run folder and files Python needs with an exception for the system file used to discard output. These checks do not provide complete protection against harmful code.
 5. **macOS protection.** The operating system adds restrictions on network access, launching other programs, changing files outside the temporary run folder and reading files in user home folders.
 
-## Development decisions
+## Development record
 
-- The expected answers are kept separate from the student code being run. The runner compares the returned answers with these expected results. This separation alone does not guarantee that deliberately harmful code cannot interfere with a result.
-- Tests check the restrictions by trying to launch another program, make a network connection, write a file and list user home folders.
-- The waiting time was shortened before stopping a test because code stuck in an endless loop took too long to report back.
+The prototype was developed locally before these imports. The commits group existing components; they do not represent the dates when each feature was first written.
 
-### Stage 2: hint controls and checks
+- [Stage 1](https://github.com/frontdev-arch/Code-Mentor/commit/d54cfbd): exercise bank and restricted runner; 18 tests passed.
+- [Stage 2](https://github.com/frontdev-arch/Code-Mentor/commit/3b03f05): hint levels, reply checks and exercise-bank tests; 135 tests passed.
+- [Stage 3](https://github.com/frontdev-arch/Code-Mentor/commit/970c068): interface, tutor workflow and scripted demonstrations; 159 tests passed.
 
-This import adds three components from the local prototype:
+The following records connect the main problems, decisions and checks. The named tests are in the linked files.
 
-- `codementor/hint_controller.py` manages three hint levels: concept, location and likely fault. More detail requires an explicit request. A change in which tests fail resets the next hint to the first level so that help does not carry over unchanged to a different problem.
-- `codementor/schema.py` checks that a reply contains the required information in the expected format. This catches incomplete or wrongly formatted replies before their content is checked.
-- `codementor/policy.py` checks hints for the requested level, solution disclosure, references to test results and unsupported claims. Rejection summaries avoid repeating text that could reveal an answer.
+| Problem and decision | Check and result |
+| --- | --- |
+| Student code could run indefinitely or access unrelated files. Runs were separated and restricted, with shorter waiting times to keep feedback responsive. | [Runner tests](tests/test_runner.py): `test_infinite_loop_times_out_per_test`, `test_runtime_layers_refuse_dangerous_operations` and `test_environment_secrets_are_not_visible_to_student_code` passed. These checks do not establish complete protection against malicious code. |
+| A reply could keep the correct level number while explaining too much. Wording checks were added and narrowed to allow useful Level 3 explanations. | [Policy tests](tests/test_policy.py): `test_level_meaning_is_checked_not_just_the_number` rejects the recorded examples; `test_level_3_may_still_explain_the_fault_and_suggest_a_direction` preserves an acceptable example. Both passed; other paraphrases may escape detection. |
+| Detailed rejection messages could repeat the solution to the student or in another model request. Fixed summaries replaced quoted offending text. | [Tutor tests](tests/test_tutor.py): `test_no_request_to_the_model_carries_the_solution_even_on_retries` and `test_rejection_shown_to_the_student_never_quotes_the_solution` passed. Detailed diagnostics remain in local logs. |
+| Citing a failing test could be mistaken for a correct diagnosis. The interface labels the citation separately and keeps the explanation unverified. | [Tutor tests](tests/test_tutor.py): `test_citing_a_failing_test_is_recorded_as_a_citation_not_as_support` passed. [The wrong-diagnosis demo](demo/wrong_diagnosis.json) deliberately shows this limitation. |
+| A hint could use old code, or retain too much detail after the problem changed. Code and questions are submitted together, changed code is tested again and changed failures reset the hint level. | [Tutor tests](tests/test_tutor.py): `test_changed_code_reruns_tests_before_the_hint` and `test_new_failing_set_resets_the_level` passed. Interface checks also exercised running code and requesting Levels 1–3 in offline and both scripted modes. |
 
-At the Stage 2 import, the expanded suite passed all 135 tests. It covers all ten exercise starters and reference solutions, pre-written hints, level changes and examples of acceptable and rejected replies. These checks make the components inspectable before the complete tutor workflow is imported.
+All 159 automated tests passed in the latest audit. These results cover the supplied cases, not every possible reply or user behaviour. No learner study has been carried out.
 
-### Stage 3: complete local interaction
+### Submission review corrections
 
-- `codementor/tutor.py` connects test results, hint levels and reply checks. It retries rejected replies and uses pre-written guidance when suitable replies are unavailable, so the interaction can continue.
-- `app.py` adds the interface. Code and questions are submitted together so a hint uses the current input. Test results appear separately from the tutor's interpretation. A reference to a failing test is labelled as a citation, not proof that the explanation is correct.
-- `codementor/providers.py` supplies fixed simulated replies, while `prompts.py` prepares the request information. Rejection feedback avoids repeating text that could reveal a solution.
-- `config.py` selects the mode and `eventlog.py` records runs and hint requests. Local records are saved in `logs/`, which Git ignores.
-- `demo/` includes a rejected solution followed by an acceptable hint, and a wrong diagnosis that cites a real failing test. These demonstrate both the checks and their limits.
-
-The complete suite passed **159 tests** after this import. Added tests cover retries, fallback hints, current-code checks, safe rejection feedback and both demonstration scripts. A separate interface smoke check loaded the app, ran an exercise and displayed a Level 1 hint. This is not a full usability evaluation.
-
-Earlier imports: [Stage 1](https://github.com/frontdev-arch/Code-Mentor/commit/d54cfbd) and [Stage 2](https://github.com/frontdev-arch/Code-Mentor/commit/3b03f05).
+The review found that two interface messages overstated solution prevention and omitted automatic level resets. The wording now explains both limits. The architecture diagram now uses solid arrows for implemented information flows and labels the student code, inputs and settings sent to the runner's separate process. The solution-request storyboard was refreshed to match the interface. These are presentation corrections; the underlying hint rules are unchanged.
 
 ## Report and illustrations
 
