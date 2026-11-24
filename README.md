@@ -104,8 +104,10 @@ These files are included in the repository.
 
 ## AI assistance
 
-I used Claude Code to produce the ten debugging exercises, their bug metadata and pre-written hints, and the Python runner and automated test code. In addition to that, I used Claude Code to produce the hint controller, reply validation, hint-content checker and accompanying automated tests.
+I wrote a requirements specification for Code Mentor that set its core design. This include the three hint levels held in application state that the model cannot change, executable tests as evidence and also kept separate from AI interpretation. A deterministic policy checker with bounded retries and a fallback. The reference solution withheld from the model and isolated execution. 
 
-I then ran the Stage 1 test suite and checked the results, confirming that all 18 tests
-passed. These tests cover reported results, syntax and loading errors, timeouts, argument mutation, selected restricted operations and exclusion of an environment test secret. This checks runner behaviour primarily using exercise 1. It does not establish that every exercise or hint is correct or that the runner is secure against arbitrary hostile code. I also ran the expanded test suite and checked the results, confirming that all 135 tests passed. These tests cover hint-level changes, incomplete replies, examples of unsuitable hints and checks across all ten exercises.
+I used Claude Code to implement the prototype and its tests from that specification and a proposed draft for the architecture diagram. I ran the prototype and checked its design against Assignment 1.
+
+I then reviewed the submission and found the problems described in Section 4. Claude Code reproduced them and I decided how each was resolved. Plain rejection categories for students, rule names only for the model, heuristic level rules with softened claims. Claude Code implemented these changes and their regression tests.
+
 
